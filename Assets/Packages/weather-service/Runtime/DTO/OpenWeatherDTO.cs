@@ -47,7 +47,7 @@ namespace WeatherService.Runtime.DTO
             }
 
 
-            public Weather Convert()
+            public Weather ConvertToWeather()
             {
                 var rainInfo = rain ?? new RainInfo();
                 var windInfo = wind ?? new WindInfo();

@@ -1,12 +1,10 @@
 ﻿using Cysharp.Threading.Tasks;
+using WeatherService.Runtime.Data;
 
 namespace WeatherService.Runtime.Network.Interfaces
 {
     public interface IWeatherProvider
     {
-        string BaseURL { get; }
-        
-        string GetJson();
-        UniTask<string> GetJson(float latitude, float longitude);
+        UniTask<Weather> GetWeather(float latitude, float longitude);
     }
 }
