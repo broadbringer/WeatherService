@@ -1,6 +1,6 @@
-﻿using Runtime.Data;
+﻿using WeatherService.Runtime.Data;
 
-namespace Runtime.DTO
+namespace WeatherService.Runtime.DTO
 {
     public interface IConvertableToWeather
     {

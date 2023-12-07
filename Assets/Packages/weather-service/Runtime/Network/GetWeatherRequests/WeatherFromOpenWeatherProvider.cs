@@ -1,9 +1,9 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Runtime.Network.Interfaces;
 using UnityEngine.Networking;
+using WeatherService.Runtime.Network.Interfaces;
 
-namespace Runtime.Network.GetWeatherRequests
+namespace WeatherService.Runtime.Network.GetWeatherRequests
 {
     public class WeatherFromOpenWeatherProvider : IWeatherProvider
     {

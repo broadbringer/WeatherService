@@ -1,11 +1,11 @@
 using Cysharp.Threading.Tasks;
-using Runtime.Data;
-using Runtime.DTO;
-using Runtime.Network.GetWeatherRequests;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
+using WeatherService.Runtime.Data;
+using WeatherService.Runtime.DTO;
+using WeatherService.Runtime.Network.GetWeatherRequests;
 
-namespace Runtime.Network
+namespace WeatherService.Runtime.Network
 {
     public class GetWeatherRequest : MonoBehaviour
     {

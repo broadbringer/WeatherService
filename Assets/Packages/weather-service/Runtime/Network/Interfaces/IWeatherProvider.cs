@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Runtime.Network.Interfaces
+namespace WeatherService.Runtime.Network.Interfaces
 {
     public interface IWeatherProvider
     {

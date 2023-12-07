@@ -1,4 +1,4 @@
-﻿namespace Runtime.Data
+﻿namespace WeatherService.Runtime.Data
 {
     public class Weather
     {

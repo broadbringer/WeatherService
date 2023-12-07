@@ -1,7 +1,7 @@
 ﻿using System;
-using Runtime.Data;
+using WeatherService.Runtime.Data;
 
-namespace Runtime.DTO
+namespace WeatherService.Runtime.DTO
 {
     [Serializable]
     public class OpenMeteoWeatherDTO : IConvertableToWeather
