@@ -13,19 +13,14 @@ namespace WeatherService.Runtime.Network
         private void Start()
         {
             var service = new WeatherService();
-
-            var weatherProviderOne = new OpenMeteoWeatherProvider();
-            var weatherProviderTwo = new OpenWeatherProvider();
             
-            service.Register(weatherProviderOne);
-            service.Register(weatherProviderTwo);
+            service.Register(new WeatherProvider<GetWeatherFromOpenMeteoRequest, OpenMeteoWeatherDTO>());
+            service.Register(new WeatherProvider<GetWeatherFromOpenWeatherRequest, OpenWeatherDTO>());
 
             service.GetWeather(33.33f, 33.33f);
         }
 
-       
-    
-    
+        
       
     }
 }

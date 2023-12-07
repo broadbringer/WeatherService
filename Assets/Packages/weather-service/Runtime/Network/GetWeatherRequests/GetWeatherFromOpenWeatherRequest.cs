@@ -5,7 +5,7 @@ using WeatherService.Runtime.Network.Interfaces;
 
 namespace WeatherService.Runtime.Network.GetWeatherRequests
 {
-    public class GetWeatherFromOpenWeatherProvider : GetWeatherRequest
+    public class GetWeatherFromOpenWeatherRequest : GetWeatherRequest
     {
         private const string APIKey = "1d540708e90bf61d1f03787a60292739";
 

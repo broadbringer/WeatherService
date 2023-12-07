@@ -27,11 +27,12 @@ namespace WeatherService.Runtime
             return weathers;
         }
         
-        public void Register<T>(T weatherProvider) where T : IWeatherProvider
+        public void Register(IWeatherProvider weatherProvider)
         {
             if (_weatherProviders.Contains(weatherProvider))
             {
                 throw new Exception($"You already have this provider with type {weatherProvider.GetType()}");
+                return;
             }
             
             _weatherProviders.Add(weatherProvider);
