@@ -17,6 +17,8 @@ public class GetWeatherRequest : MonoBehaviour
     private void Start()
     {
         GetWeather();
+
+        GetAnotherWeather();
     }
 
     private async UniTask GetWeather()
@@ -25,12 +27,29 @@ public class GetWeatherRequest : MonoBehaviour
 
         var result = await request.GetJson(49.45f, 4.13f);
         
-        OpenMeteoWeatherData weatherDataA = JsonConvert.DeserializeObject<OpenMeteoWeatherData>(result, new JsonSerializerSettings
+        OpenMeteoWeatherDTO weatherDtoA = JsonConvert.DeserializeObject<OpenMeteoWeatherDTO>(result, new JsonSerializerSettings
         {
             FloatParseHandling = FloatParseHandling.Decimal
         });
 
-        Weather weather = weatherDataA.Convert();
-        Debug.Log(weather.Rain);
+        Weather weather = weatherDtoA.Convert();
+        Debug.Log(weather.WindSpeed);
+    }
+    
+    
+    private async UniTask GetAnotherWeather()
+    {
+        var request = new GetWeatherFromOpenWeatherRequest();
+
+        var result = await request.GetJson(49.45f, 4.13f);
+        
+        OpenWeatherDTO weatherDtoA = JsonConvert.DeserializeObject<OpenWeatherDTO>(result, new JsonSerializerSettings
+        {
+            FloatParseHandling = FloatParseHandling.Decimal
+        });
+
+        Weather weather = weatherDtoA.Convert();
+        
+        Debug.Log(weather.WindSpeed);
     }
 }
