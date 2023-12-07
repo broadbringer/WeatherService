@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using Cysharp.Threading.Tasks;
-using Packages.weather_service.Runtime.Network.Interfaces;
-using UnityEngine;
+using Runtime.Network.Interfaces;
 using UnityEngine.Networking;
 
-namespace Packages.weather_service.Runtime.Network.GetWeatherRequests
+namespace Runtime.Network.GetWeatherRequests
 {
-    public class GetWeatherFromOpenMeteoRequest : IGetWeatherRequest
+    public class WeatherFromOpenMeteoProvider : IWeatherProvider
     {
         public string BaseURL =>
             "https://api.open-meteo.com/v1/forecast?";

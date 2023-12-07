@@ -1,11 +1,11 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Packages.weather_service.Runtime.Network.Interfaces;
+using Runtime.Network.Interfaces;
 using UnityEngine.Networking;
 
-namespace Packages.weather_service.Runtime.Network.GetWeatherRequests
+namespace Runtime.Network.GetWeatherRequests
 {
-    public class GetWeatherFromOpenWeatherRequest : IGetWeatherRequest
+    public class WeatherFromOpenWeatherProvider : IWeatherProvider
     {
         private const string APIKey = "1d540708e90bf61d1f03787a60292739";
         

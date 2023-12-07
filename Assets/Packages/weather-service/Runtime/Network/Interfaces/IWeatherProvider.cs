@@ -1,8 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Packages.weather_service.Runtime.Network.Interfaces
+namespace Runtime.Network.Interfaces
 {
-    public interface IGetWeatherRequest
+    public interface IWeatherProvider
     {
         string BaseURL { get; }
         

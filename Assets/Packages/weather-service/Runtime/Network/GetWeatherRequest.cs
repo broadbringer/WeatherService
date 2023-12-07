@@ -1,55 +1,51 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Packages.weather_service.Runtime.Data;
-using Packages.weather_service.Runtime.DTO;
-using Packages.weather_service.Runtime.Network.GetWeatherRequests;
+using Runtime.Data;
+using Runtime.DTO;
+using Runtime.Network.GetWeatherRequests;
 using Unity.Plastic.Newtonsoft.Json;
-using Unity.Plastic.Newtonsoft.Json.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class GetWeatherRequest : MonoBehaviour
+namespace Runtime.Network
 {
-    private void Start()
+    public class GetWeatherRequest : MonoBehaviour
     {
-        GetWeather();
-
-        GetAnotherWeather();
-    }
-
-    private async UniTask GetWeather()
-    {
-        var request = new GetWeatherFromOpenMeteoRequest();
-
-        var result = await request.GetJson(49.45f, 4.13f);
-        
-        OpenMeteoWeatherDTO weatherDtoA = JsonConvert.DeserializeObject<OpenMeteoWeatherDTO>(result, new JsonSerializerSettings
+        private void Start()
         {
-            FloatParseHandling = FloatParseHandling.Decimal
-        });
+            GetWeather();
 
-        Weather weather = weatherDtoA.Convert();
-        Debug.Log(weather.WindSpeed);
-    }
+            GetAnotherWeather();
+        }
+
+        private async UniTask GetWeather()
+        {
+            var request = new WeatherFromOpenMeteoProvider();
+
+            var result = await request.GetJson(49.45f, 4.13f);
+        
+            OpenMeteoWeatherDTO weatherDtoA = JsonConvert.DeserializeObject<OpenMeteoWeatherDTO>(result, new JsonSerializerSettings
+            {
+                FloatParseHandling = FloatParseHandling.Decimal
+            });
+
+            Weather weather = weatherDtoA.Convert();
+            Debug.Log(weather.WindSpeed);
+        }
     
     
-    private async UniTask GetAnotherWeather()
-    {
-        var request = new GetWeatherFromOpenWeatherRequest();
-
-        var result = await request.GetJson(49.45f, 4.13f);
-        
-        OpenWeatherDTO weatherDtoA = JsonConvert.DeserializeObject<OpenWeatherDTO>(result, new JsonSerializerSettings
+        private async UniTask GetAnotherWeather()
         {
-            FloatParseHandling = FloatParseHandling.Decimal
-        });
+            var request = new WeatherFromOpenWeatherProvider();
 
-        Weather weather = weatherDtoA.Convert();
+            var result = await request.GetJson(49.45f, 4.13f);
         
-        Debug.Log(weather.WindSpeed);
+            OpenWeatherDTO weatherDtoA = JsonConvert.DeserializeObject<OpenWeatherDTO>(result, new JsonSerializerSettings
+            {
+                FloatParseHandling = FloatParseHandling.Decimal
+            });
+
+            Weather weather = weatherDtoA.Convert();
+        
+            Debug.Log(weather.WindSpeed);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Packages.weather_service.Runtime.Data
+﻿namespace Runtime.Data
 {
     public class Weather
     {
