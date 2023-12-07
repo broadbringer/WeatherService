@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using WeatherService.Runtime.Data;
 using WeatherService.Runtime.DTO;
 using WeatherService.Runtime.Network.GetWeatherRequests;
@@ -10,7 +11,7 @@ namespace WeatherService.Runtime.Network.Interfaces
     {
         private readonly T _getWeatherRequest = new T();
 
-        public async UniTask<Weather> GetWeather(float latitude, float longitude) =>
-            (await _getWeatherRequest.GetJson(latitude, longitude)).Deserialize<U>().ConvertToWeather();
+        public async UniTask<Weather> GetWeather(float latitude, float longitude, CancellationTokenSource cancellationTokenSource) =>
+            (await _getWeatherRequest.GetJson(latitude, longitude, cancellationTokenSource)).Deserialize<U>().ConvertToWeather();
     }
 }

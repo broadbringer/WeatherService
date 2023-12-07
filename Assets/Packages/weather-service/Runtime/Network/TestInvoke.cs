@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
@@ -13,11 +15,11 @@ namespace WeatherService.Runtime.Network
         private void Start()
         {
             var service = new WeatherService();
-            
+            var cancellationTokenSource = new CancellationTokenSource();
             service.Register(new WeatherProvider<GetWeatherFromOpenMeteoRequest, OpenMeteoWeatherDTO>());
             service.Register(new WeatherProvider<GetWeatherFromOpenWeatherRequest, OpenWeatherDTO>());
 
-            service.GetWeather(33.33f, 33.33f);
+            service.GetWeather(33.33f, 33.33f, cancellationTokenSource, 10);
         }
 
         
