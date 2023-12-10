@@ -12,9 +12,9 @@ namespace WeatherService.Runtime
 {
     public class WeatherService
     {
-        //TODO Обернуть weather в отдельный класс, и добавить приоритетоность загрузки.
-        private List<IWeatherProvider> _weatherProviders = new();
-
+        private Weather _weather = new();
+        private List<IWeatherProvider> _providers = new();
+        
         private TemperatureMeasurementUnit _temperatureMeasurementUnit = TemperatureMeasurementUnit.Celsius;
         private WindMeasurementUnit _windMeasurementUnit = WindMeasurementUnit.MeterPerSecond;
 
@@ -23,45 +23,45 @@ namespace WeatherService.Runtime
         public void SetWindMeasurementUnit(WindMeasurementUnit @as) =>
             _windMeasurementUnit = @as;
         
-        public async UniTask<List<WeatherData>> GetWeather(float latitude, float longitude,
+        public async UniTask<Weather> GetWeather(float latitude, float longitude,
             CancellationTokenSource cancellationTokenSource, float maxWaitTimeInSeconds = 1000)
         {
-            var weathers = new List<WeatherData>();
-            var weatherTasks = GetWeatherTask(latitude, longitude, cancellationTokenSource, weathers);
+            _weather.Clear();
+            
+            var weatherTasks = GetWeatherTask(latitude, longitude, cancellationTokenSource);
             var waitMaxTimeTask = UniTask.Delay(TimeSpan.FromSeconds(maxWaitTimeInSeconds), cancellationToken: cancellationTokenSource.Token); //add cancellation token
             await UniTask.WhenAny(UniTask.WhenAll(weatherTasks), waitMaxTimeTask);
 
             cancellationTokenSource.Cancel();
             
-            if (weathers.Count <= 0)
+            if (_weather.WeatherProviderToWeatherDataMap.Count <= 0)
                 return null;
+
+            var value = _weather.GetValueFor(WeatherType.Temperature, WindMeasurementUnit.MeterPerSecond,
+                TemperatureMeasurementUnit.Celsius);
             
-            foreach (var weatherData in weathers)
-            {
-                var x =weatherData.GetWindDataIn(WindMeasurementUnit.MeterPerSecond);
-                Debug.Log(x.WindSpeed);
-            }
+            Debug.Log(value);
             
-            return weathers;
+            return _weather;
         }
 
         public void Register(IWeatherProvider weatherProvider)
         {
-            if (_weatherProviders.Contains(weatherProvider))
+            if (_providers.Contains(weatherProvider))
             {
                 throw new Exception($"You already have this provider with type {weatherProvider.GetType()}");
                 return;
             }
 
-            _weatherProviders.Add(weatherProvider);
+            _providers.Add(weatherProvider);
         }
 
         private IEnumerable<UniTask> GetWeatherTask(float latitude, float longitude,
-            CancellationTokenSource cancellationTokenSource, List<WeatherData> weathers) =>
-            _weatherProviders.Select(async wp =>
+            CancellationTokenSource cancellationTokenSource) =>
+            _providers.Select(async wp =>
             {
                 var weather = await wp.GetWeather(latitude, longitude, cancellationTokenSource, _windMeasurementUnit, _temperatureMeasurementUnit);
-                weathers.Add(weather);
+                _weather.Add(weather, wp);
             });
     }
 }
