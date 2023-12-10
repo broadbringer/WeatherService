@@ -3,6 +3,7 @@ using WeatherService.Runtime.Data;
 
 namespace WeatherService.Runtime.DTO
 {
+    //TODO подумать на convertable
     [Serializable]
     public class OpenMeteoWeatherDTO : IConvertableToWeather
     {

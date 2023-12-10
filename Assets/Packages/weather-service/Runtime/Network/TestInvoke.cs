@@ -16,10 +16,10 @@ namespace WeatherService.Runtime.Network
         {
             var service = new WeatherService();
             var cancellationTokenSource = new CancellationTokenSource();
-            service.Register(new WeatherProvider<GetWeatherFromOpenMeteoRequest, OpenMeteoWeatherDTO>());
-            service.Register(new WeatherProvider<GetWeatherFromOpenWeatherRequest, OpenWeatherDTO>());
+            service.Register(new OpenMeteoWeatherProvider());
+            service.Register(new OpenWeatherWeatherProvider());
 
-            service.GetWeather(33.33f, 33.33f, cancellationTokenSource, 10);
+            service.GetWeather(33.33f, 33.33f, cancellationTokenSource, 10).Forget();
         }
 
         

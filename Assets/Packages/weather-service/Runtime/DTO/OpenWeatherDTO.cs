@@ -6,6 +6,7 @@ namespace WeatherService.Runtime.DTO
     [Serializable]
     public class OpenWeatherDTO : IConvertableToWeather
     {
+        // пометить атрибутами.
             public MainInfo main;
             public WindInfo wind;
             public RainInfo rain;

@@ -12,24 +12,22 @@ namespace WeatherService.Runtime
 {
     public class WeatherService
     {
+        //TODO Обернуть weather в отдельный класс, и добавить приоритетоность загрузки.
         private List<IWeatherProvider> _weatherProviders = new();
 
         public async UniTask<List<Weather>> GetWeather(float latitude, float longitude,
             CancellationTokenSource cancellationTokenSource, float maxWaitTimeInSeconds)
         {
             var weathers = new List<Weather>();
-
             var weatherTasks = GetWeatherTask(latitude, longitude, cancellationTokenSource, weathers);
-            
-            var waitMaxTimeTask = UniTask.Delay(TimeSpan.FromSeconds(maxWaitTimeInSeconds));
-
+            var waitMaxTimeTask = UniTask.Delay(TimeSpan.FromSeconds(maxWaitTimeInSeconds)); //add cancellation token
             await UniTask.WhenAny(UniTask.WhenAll(weatherTasks), waitMaxTimeTask);
-            
+
             if (weathers.Count <= 0)
                 return null;
 
             weathers.ForEach(w => Debug.Log(w.WindSpeed));
-            
+
             return weathers;
         }
 
@@ -44,7 +42,8 @@ namespace WeatherService.Runtime
             _weatherProviders.Add(weatherProvider);
         }
 
-        private IEnumerable<UniTask> GetWeatherTask(float latitude, float longitude, CancellationTokenSource cancellationTokenSource, List<Weather> weathers) =>
+        private IEnumerable<UniTask> GetWeatherTask(float latitude, float longitude,
+            CancellationTokenSource cancellationTokenSource, List<Weather> weathers) =>
             _weatherProviders.Select(async wp =>
             {
                 var weather = await wp.GetWeather(latitude, longitude, cancellationTokenSource);

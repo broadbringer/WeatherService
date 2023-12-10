@@ -7,7 +7,7 @@ using WeatherService.Runtime.Utils;
 
 namespace WeatherService.Runtime.Network.Interfaces
 {
-    public class WeatherProvider<T, U> : IWeatherProvider where T : GetWeatherRequest, new() where U : IConvertableToWeather
+    public class WeatherProvider<T, U> : IWeatherProvider where T : WeatherRequest, new() where U : IConvertableToWeather
     {
         private readonly T _getWeatherRequest = new T();
 

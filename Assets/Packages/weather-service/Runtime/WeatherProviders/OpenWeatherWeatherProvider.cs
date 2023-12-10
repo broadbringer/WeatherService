@@ -3,7 +3,7 @@ using WeatherService.Runtime.Network.GetWeatherRequests;
 
 namespace WeatherService.Runtime.Network.Interfaces
 {
-    public class OpenWeatherWeatherProvider : WeatherProvider<GetWeatherFromOpenWeatherRequest, OpenWeatherDTO>
+    public class OpenWeatherWeatherProvider : WeatherProvider<WeatherFromOpenWeatherRequest, OpenWeatherDTO>
     {
         
     }

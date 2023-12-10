@@ -6,7 +6,7 @@ using WeatherService.Runtime.Network.Interfaces;
 
 namespace WeatherService.Runtime.Network.GetWeatherRequests
 {
-    public class GetWeatherFromOpenMeteoRequest : GetWeatherRequest
+    public class WeatherFromOpenMeteoRequest : WeatherRequest
     {
         protected override string BaseURL =>
             "https://api.open-meteo.com/v1/forecast?";

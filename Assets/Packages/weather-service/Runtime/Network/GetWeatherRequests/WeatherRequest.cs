@@ -6,20 +6,16 @@ using UnityEngine.Networking;
 
 namespace WeatherService.Runtime.Network.Interfaces
 {
-    public abstract class GetWeatherRequest
+    public abstract class WeatherRequest
     {
         protected abstract string BaseURL { get; }
         protected abstract string SetRequestParams(float latitude, float longitude);
-
-        public string GetJson()
-        {
-            return string.Empty;
-        }
-
+        
         public async UniTask<string> GetJson(float latitude, float longitude, CancellationTokenSource cancellationTokenSource)
         {
             var url = BaseURL + SetRequestParams(latitude, longitude);
 
+            //TODO Подумать на UnityWebRequest или обычные.
             var request = UnityWebRequest.Get(url).SendWebRequest();
             await UniTask.WaitUntil(() => request.isDone || cancellationTokenSource.IsCancellationRequested, cancellationToken: cancellationTokenSource.Token).SuppressCancellationThrow();
             
