@@ -19,7 +19,7 @@ namespace WeatherService.Runtime.Network
             service.Register(new OpenMeteoWeatherProvider());
             service.Register(new OpenWeatherWeatherProvider());
 
-            service.GetWeather(33.33f, 33.33f, cancellationTokenSource, 10).Forget();
+             service.GetWeather(33.33f, 33.33f, cancellationTokenSource).Forget();
         }
 
         

@@ -8,7 +8,7 @@ namespace WeatherService.Runtime.DTO
     public class OpenMeteoWeatherDTO : IConvertableToWeather
     {
         public CurrentInfo current;
-
+        
         [Serializable]
         public class CurrentInfo
         {
@@ -22,8 +22,10 @@ namespace WeatherService.Runtime.DTO
             public decimal wind_direction_10m;
             public decimal wind_gusts_10m;
         }
-
-        public Weather ConvertToWeather() => 
-            new(current.temperature_2m, current.relative_humidity_2m, current.apparent_temperature, current.rain, current.cloud_cover, current.snowfall, current.wind_speed_10m, current.wind_direction_10m, current.wind_gusts_10m);
+        
+        public WeatherData ConvertToWeather(WindMeasurementUnit windMeasurementUnit, TemperatureMeasurementUnit temperatureMeasurementUnit) =>
+            new(current.temperature_2m, current.relative_humidity_2m, current.apparent_temperature, current.rain,
+                current.cloud_cover, current.snowfall, current.wind_speed_10m, current.wind_direction_10m,
+                current.wind_gusts_10m, windMeasurementUnit, temperatureMeasurementUnit);
     }
 }

@@ -7,11 +7,14 @@ using WeatherService.Runtime.Utils;
 
 namespace WeatherService.Runtime.Network.Interfaces
 {
-    public class WeatherProvider<T, U> : IWeatherProvider where T : WeatherRequest, new() where U : IConvertableToWeather
+    public abstract class WeatherProvider<T, U> : IWeatherProvider where T : WeatherRequest, new() where U : IConvertableToWeather
     {
         private readonly T _getWeatherRequest = new T();
-
-        public async UniTask<Weather> GetWeather(float latitude, float longitude, CancellationTokenSource cancellationTokenSource) =>
-            (await _getWeatherRequest.GetJson(latitude, longitude, cancellationTokenSource)).Deserialize<U>().ConvertToWeather();
+        
+        protected abstract WindMeasurementUnit _windMeasurementUnit { get; }
+        protected abstract TemperatureMeasurementUnit _temperatureMeasurementUnit { get; }
+        
+        public async UniTask<WeatherData> GetWeather(float latitude, float longitude, CancellationTokenSource cancellationTokenSource, WindMeasurementUnit defaultWindMeasurementUnit, TemperatureMeasurementUnit defaultTemperatureMeasurementUnit) =>
+            (await _getWeatherRequest.GetJson(latitude, longitude, cancellationTokenSource)).Deserialize<U>().ConvertToWeather(_windMeasurementUnit, _temperatureMeasurementUnit);
     }
 }

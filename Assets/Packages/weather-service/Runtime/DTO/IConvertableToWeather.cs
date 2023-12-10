@@ -4,6 +4,6 @@ namespace WeatherService.Runtime.DTO
 {
     public interface IConvertableToWeather
     {
-        Weather ConvertToWeather();
+        WeatherData ConvertToWeather(WindMeasurementUnit windMeasurementUnit, TemperatureMeasurementUnit temperatureMeasurementUnit);
     }
 }

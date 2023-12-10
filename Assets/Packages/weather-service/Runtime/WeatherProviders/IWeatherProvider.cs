@@ -6,6 +6,6 @@ namespace WeatherService.Runtime.Network.Interfaces
 {
     public interface IWeatherProvider
     {
-        UniTask<Weather> GetWeather(float latitude, float longitude, CancellationTokenSource cancellationTokenSource);
+        UniTask<WeatherData> GetWeather(float latitude, float longitude, CancellationTokenSource cancellationTokenSource,WindMeasurementUnit windMeasurementUnit, TemperatureMeasurementUnit temperatureMeasurementUnit);
     }
 }
