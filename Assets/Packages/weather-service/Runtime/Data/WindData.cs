@@ -11,7 +11,7 @@ namespace WeatherService.Runtime.Data
 
         private WindMeasurementUnit _measurementUnit;
 
-        private static readonly Dictionary<Tuple<WindMeasurementUnit, WindMeasurementUnit>, decimal> ConversionFactors =
+        private readonly Dictionary<Tuple<WindMeasurementUnit, WindMeasurementUnit>, decimal> _conversionFactors =
             new()
             {
                 { Tuple.Create(WindMeasurementUnit.MeterPerSecond, WindMeasurementUnit.KilometerPerHour), 3.6m },
@@ -36,7 +36,7 @@ namespace WeatherService.Runtime.Data
             if (_measurementUnit == windMeasurementUnit)
                 return this;
 
-            if (!ConversionFactors.TryGetValue(Tuple.Create(_measurementUnit, windMeasurementUnit),
+            if (!_conversionFactors.TryGetValue(Tuple.Create(_measurementUnit, windMeasurementUnit),
                     out decimal conversionFactor))
                 throw new InvalidOperationException("Conversion between specified units is not supported.");
 

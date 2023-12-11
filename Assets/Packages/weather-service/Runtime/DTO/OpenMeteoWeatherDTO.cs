@@ -1,31 +1,40 @@
 ﻿using System;
+using Unity.Plastic.Newtonsoft.Json;
 using WeatherService.Runtime.Data;
 
 namespace WeatherService.Runtime.DTO
 {
-    //TODO подумать на convertable
     [Serializable]
     public class OpenMeteoWeatherDTO : IConvertableToWeather
     {
         public CurrentInfo current;
-        
+
         [Serializable]
         public class CurrentInfo
         {
-            public decimal temperature_2m;
-            public decimal relative_humidity_2m;
-            public decimal apparent_temperature;
-            public decimal rain;
-            public decimal cloud_cover;
-            public decimal snowfall;
-            public decimal wind_speed_10m;
-            public decimal wind_direction_10m;
-            public decimal wind_gusts_10m;
+            [JsonProperty("temperature_2m")] public decimal Temperature { get; set; }
+
+            [JsonProperty("relative_humidity_2m")] public decimal RelativeHumidity { get; set; }
+
+            [JsonProperty("apparent_temperature")] public decimal ApparentTemperature { get; set; }
+
+            [JsonProperty("rain")] public decimal Rain { get; set; }
+
+            [JsonProperty("cloud_cover")] public decimal CloudCover { get; set; }
+
+            [JsonProperty("snowfall")] public decimal Snowfall { get; set; }
+
+            [JsonProperty("wind_speed_10m")] public decimal WindSpeed { get; set; }
+
+            [JsonProperty("wind_direction_10m")] public decimal WindDirection { get; set; }
+
+            [JsonProperty("wind_gusts_10m")] public decimal WindGusts { get; set; }
         }
-        
-        public WeatherData ConvertToWeather(WindMeasurementUnit windMeasurementUnit, TemperatureMeasurementUnit temperatureMeasurementUnit) =>
-            new(current.temperature_2m, current.relative_humidity_2m, current.apparent_temperature, current.rain,
-                current.cloud_cover, current.snowfall, current.wind_speed_10m, current.wind_direction_10m,
-                current.wind_gusts_10m, windMeasurementUnit, temperatureMeasurementUnit);
+
+        public WeatherData ConvertToWeather(WindMeasurementUnit windMeasurementUnit,
+            TemperatureMeasurementUnit temperatureMeasurementUnit) =>
+            new(current.Temperature, current.RelativeHumidity, current.ApparentTemperature, current.Rain,
+                current.CloudCover, current.Snowfall, current.WindSpeed, current.WindDirection,
+                current.WindGusts, windMeasurementUnit, temperatureMeasurementUnit);
     }
 }

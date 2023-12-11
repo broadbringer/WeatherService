@@ -37,10 +37,7 @@ namespace WeatherService.Runtime
 
             cancellationTokenSource.Cancel();
 
-            if (_weather.WeatherProviderToWeatherDataMap.Count <= 0)
-                return null;
-
-            return _weather;
+            return _weather.WeatherProviderToWeatherDataMap.Count <= 0 ? null : _weather;
         }
 
         public void Register(IWeatherProvider weatherProvider)

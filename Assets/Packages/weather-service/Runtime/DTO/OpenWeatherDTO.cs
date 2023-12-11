@@ -1,4 +1,6 @@
 ﻿using System;
+using Unity.Plastic.Newtonsoft.Json;
+using UnityEngine.Serialization;
 using WeatherService.Runtime.Data;
 
 namespace WeatherService.Runtime.DTO
@@ -16,35 +18,39 @@ namespace WeatherService.Runtime.DTO
         [System.Serializable]
         public class MainInfo
         {
-            public decimal temp;
-            public decimal humidity;
-            public decimal feels_like;
+             [JsonProperty("temp")] public decimal Temperature { get; set; }
+
+             [JsonProperty("humidity")] public decimal Humidity { get; set; }
+
+             [JsonProperty("feels_like")] public decimal FeelsLike { get; set; }
         }
 
         [System.Serializable]
         public class WindInfo
         {
-            public decimal speed;
-            public decimal deg;
-            public decimal gust;
+             [JsonProperty("speed")] public decimal Speed { get; set; }
+
+            [JsonProperty("deg")] public decimal Deg { get; set; }
+
+             [JsonProperty("gust")] public decimal Gust { get; set; }
         }
 
         [System.Serializable]
         public class RainInfo
         {
-            public decimal _1h;
+            [JsonProperty("_1h")] public decimal Rain { get; set; }
         }
 
         [Serializable]
         public class CloudInfo
         {
-            public decimal all;
+            [JsonProperty("all")] public decimal Clouds { get; set; }
         }
 
         [Serializable]
         public class SnowInfo
         {
-            public decimal _1h;
+            [JsonProperty("_1h")] public decimal Snow { get; set; }
         }
 
 
@@ -56,9 +62,10 @@ namespace WeatherService.Runtime.DTO
             var snowInfo = snow ?? new SnowInfo();
             var cloudInfo = clouds ?? new CloudInfo();
 
-            return new WeatherData(main.temp, main.humidity, main.feels_like, rainInfo._1h, cloudInfo.all, snowInfo._1h,
-                windInfo.speed,
-                windInfo.deg, windInfo.gust, windMeasurementUnit, temperatureMeasurementUnit);
+            return new WeatherData(main.Temperature, main.Humidity, main.FeelsLike, rainInfo.Rain, cloudInfo.Clouds,
+                snowInfo.Snow,
+                windInfo.Speed,
+                windInfo.Deg, windInfo.Gust, windMeasurementUnit, temperatureMeasurementUnit);
         }
     }
 }
