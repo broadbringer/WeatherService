@@ -1,4 +1,6 @@
-﻿namespace WeatherService.Runtime.Data
+﻿using WeatherService.Runtime.Enums;
+
+namespace WeatherService.Runtime.Data
 {
     public class WeatherData
     {

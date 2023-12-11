@@ -2,10 +2,11 @@
 using Cysharp.Threading.Tasks;
 using WeatherService.Runtime.Data;
 using WeatherService.Runtime.DTO;
+using WeatherService.Runtime.Enums;
 using WeatherService.Runtime.Network.GetWeatherRequests;
 using WeatherService.Runtime.Utils;
 
-namespace WeatherService.Runtime.Network.Interfaces
+namespace WeatherService.Runtime.WeatherProviders
 {
     public abstract class WeatherProvider<T, U> : IWeatherProvider where T : WeatherRequest, new() where U : IConvertableToWeather
     {

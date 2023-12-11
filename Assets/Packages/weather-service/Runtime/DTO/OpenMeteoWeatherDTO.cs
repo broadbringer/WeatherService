@@ -1,6 +1,7 @@
 ﻿using System;
 using Unity.Plastic.Newtonsoft.Json;
 using WeatherService.Runtime.Data;
+using WeatherService.Runtime.Enums;
 
 namespace WeatherService.Runtime.DTO
 {

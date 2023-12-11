@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using Cysharp.Threading.Tasks;
-using UnityEngine.Networking;
-using WeatherService.Runtime.Network.Interfaces;
+﻿using System.Globalization;
 
 namespace WeatherService.Runtime.Network.GetWeatherRequests
 {

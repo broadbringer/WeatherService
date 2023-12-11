@@ -1,4 +1,4 @@
-﻿namespace WeatherService.Runtime.Data
+﻿namespace WeatherService.Runtime.Enums
 {
     public enum WindMeasurementUnit
     {

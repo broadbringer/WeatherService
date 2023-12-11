@@ -1,26 +1,19 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
-using WeatherService.Runtime.Data;
-using WeatherService.Runtime.DTO;
-using WeatherService.Runtime.Network.GetWeatherRequests;
-using WeatherService.Runtime.Network.Interfaces;
+using WeatherService.Runtime.Enums;
+using WeatherService.Runtime.WeatherProviders;
 
-namespace WeatherService.Runtime.Network
+namespace Samples
 {
-    public class TestInvoke : MonoBehaviour
+    public class ExampleOfWorkingWithService : MonoBehaviour
     {
-        private void Start()
-        {
+        private void Start() => 
             GetWeather();
-        }
-
 
         private async UniTask GetWeather()
         {
-            var service = new WeatherService();
+            var service = new WeatherService.Runtime.WeatherService();
             var cancellationTokenSource = new CancellationTokenSource();
             var cancellationTokenSourceTwo = new CancellationTokenSource();
             service.Register(new OpenMeteoWeatherProvider());

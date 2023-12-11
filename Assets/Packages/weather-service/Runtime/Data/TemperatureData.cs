@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using WeatherService.Runtime.Enums;
 
 namespace WeatherService.Runtime.Data
 {

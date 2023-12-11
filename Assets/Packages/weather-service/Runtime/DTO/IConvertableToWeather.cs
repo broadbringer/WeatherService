@@ -1,4 +1,5 @@
 ﻿using WeatherService.Runtime.Data;
+using WeatherService.Runtime.Enums;
 
 namespace WeatherService.Runtime.DTO
 {

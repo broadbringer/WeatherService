@@ -1,5 +1,4 @@
 ﻿using Unity.Plastic.Newtonsoft.Json;
-using WeatherService.Runtime.DTO;
 
 namespace WeatherService.Runtime.Utils
 {

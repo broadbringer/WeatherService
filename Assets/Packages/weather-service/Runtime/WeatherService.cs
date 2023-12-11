@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using PlasticGui.WorkspaceWindow.Diff;
-using UnityEngine;
 using WeatherService.Runtime.Data;
-using WeatherService.Runtime.Network.Interfaces;
+using WeatherService.Runtime.Enums;
+using WeatherService.Runtime.WeatherProviders;
 
 namespace WeatherService.Runtime
 {

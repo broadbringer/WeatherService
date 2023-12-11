@@ -1,8 +1,8 @@
-﻿using WeatherService.Runtime.Data;
-using WeatherService.Runtime.DTO;
+﻿using WeatherService.Runtime.DTO;
+using WeatherService.Runtime.Enums;
 using WeatherService.Runtime.Network.GetWeatherRequests;
 
-namespace WeatherService.Runtime.Network.Interfaces
+namespace WeatherService.Runtime.WeatherProviders
 {
     public class OpenMeteoWeatherProvider : WeatherProvider<WeatherFromOpenMeteoRequest, OpenMeteoWeatherDTO>
     {

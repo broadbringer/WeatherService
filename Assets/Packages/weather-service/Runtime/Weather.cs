@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using WeatherService.Runtime.Data;
-using WeatherService.Runtime.Network.Interfaces;
-using Random = UnityEngine.Random;
+using WeatherService.Runtime.Enums;
+using WeatherService.Runtime.WeatherProviders;
 
 namespace WeatherService.Runtime
 {

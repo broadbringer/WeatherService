@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using WeatherService.Runtime.Data;
+using WeatherService.Runtime.Enums;
 
-namespace WeatherService.Runtime.Network.Interfaces
+namespace WeatherService.Runtime.WeatherProviders
 {
     public interface IWeatherProvider
     {

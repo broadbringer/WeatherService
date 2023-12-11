@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.Networking;
 
-namespace WeatherService.Runtime.Network.Interfaces
+namespace WeatherService.Runtime.Network.GetWeatherRequests
 {
     public abstract class WeatherRequest
     {
@@ -14,8 +13,7 @@ namespace WeatherService.Runtime.Network.Interfaces
         public async UniTask<string> GetJson(float latitude, float longitude, CancellationTokenSource cancellationTokenSource)
         {
             var url = BaseURL + SetRequestParams(latitude, longitude);
-
-            //TODO Подумать на UnityWebRequest или обычные.
+            
             var request = UnityWebRequest.Get(url).SendWebRequest();
             await UniTask.WaitUntil(() => request.isDone || cancellationTokenSource.IsCancellationRequested, cancellationToken: cancellationTokenSource.Token).SuppressCancellationThrow();
             

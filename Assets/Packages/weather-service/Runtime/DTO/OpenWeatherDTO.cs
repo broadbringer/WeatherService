@@ -1,21 +1,20 @@
 ﻿using System;
 using Unity.Plastic.Newtonsoft.Json;
-using UnityEngine.Serialization;
 using WeatherService.Runtime.Data;
+using WeatherService.Runtime.Enums;
 
 namespace WeatherService.Runtime.DTO
 {
     [Serializable]
     public class OpenWeatherDTO : IConvertableToWeather
     {
-        // пометить атрибутами.
         public MainInfo main;
         public WindInfo wind;
         public RainInfo rain;
         public SnowInfo snow;
         public CloudInfo clouds;
 
-        [System.Serializable]
+        [Serializable]
         public class MainInfo
         {
              [JsonProperty("temp")] public decimal Temperature { get; set; }
@@ -25,7 +24,7 @@ namespace WeatherService.Runtime.DTO
              [JsonProperty("feels_like")] public decimal FeelsLike { get; set; }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class WindInfo
         {
              [JsonProperty("speed")] public decimal Speed { get; set; }
@@ -35,7 +34,7 @@ namespace WeatherService.Runtime.DTO
              [JsonProperty("gust")] public decimal Gust { get; set; }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class RainInfo
         {
             [JsonProperty("_1h")] public decimal Rain { get; set; }
