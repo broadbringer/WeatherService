@@ -14,15 +14,20 @@ namespace WeatherService.Runtime.Network
     {
         private void Start()
         {
+            GetWeather();
+        }
+
+
+        private async UniTask GetWeather()
+        {
             var service = new WeatherService();
             var cancellationTokenSource = new CancellationTokenSource();
             service.Register(new OpenMeteoWeatherProvider());
             service.Register(new OpenWeatherWeatherProvider());
 
-             service.GetWeather(33.33f, 33.33f, cancellationTokenSource).Forget();
+            var weather = (await service.GetWeather(33.33f, 33.33f, cancellationTokenSource)).GetValueFor<OpenMeteoWeatherProvider>(WeatherType.Temperature, WindMeasurementUnit.KilometerPerHour, TemperatureMeasurementUnit.Celsius);
+            Debug.Log(weather);
         }
-
-        
       
     }
 }

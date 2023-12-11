@@ -11,12 +11,11 @@ namespace WeatherService.Runtime
     {
         public Dictionary<IWeatherProvider, WeatherData> WeatherProviderToWeatherDataMap { get; } = new();
 
-        public void Add(WeatherData data, IWeatherProvider forProvider) =>
-            WeatherProviderToWeatherDataMap[forProvider] = data;
+        public void Add(WeatherData data, IWeatherProvider fromProvider) =>
+            WeatherProviderToWeatherDataMap[fromProvider] = data;
 
         public void Clear() =>
             WeatherProviderToWeatherDataMap.Clear();
-
 
         public decimal GetValueFor(WeatherType weatherType, WindMeasurementUnit withWindUnit,
             TemperatureMeasurementUnit withTemperatureMeasurementUnit)
@@ -28,14 +27,19 @@ namespace WeatherService.Runtime
         }
 
         public decimal GetValueFor<T>(WeatherType weatherType, WindMeasurementUnit withWindUnit,
-            TemperatureMeasurementUnit withTemperatureMeasurementUnit, T preferredProvider) where T : IWeatherProvider
+            TemperatureMeasurementUnit withTemperatureMeasurementUnit) where T : IWeatherProvider
         {
-            var data = TryGetValue(preferredProvider);
-            if (data != null)
-            {
-                return GetValueFromPreferredProvider(data, weatherType, withWindUnit, withTemperatureMeasurementUnit);
-            }
+            var weatherProvider = WeatherProviderToWeatherDataMap.Keys.First(k => k.GetType() == typeof(T));
 
+            if (WeatherProviderToWeatherDataMap.TryGetValue(weatherProvider, out var data))
+            {
+                if (data != null)
+                {
+                    return GetValueFromPreferredProvider(data, weatherType, withWindUnit,
+                        withTemperatureMeasurementUnit);
+                }
+            }
+            
             throw new Exception("You don't have any ready weather data's");
         }
 
@@ -78,14 +82,6 @@ namespace WeatherService.Runtime
                     v.GetWindDataIn(withWindUnit).WindGust),
                 _ => throw new Exception($"There are no such weatherType {weatherType}")
             };
-        }
-
-        private WeatherData TryGetValue(IWeatherProvider fromProvider)
-        {
-            if (!WeatherProviderToWeatherDataMap.TryGetValue(fromProvider, out var data))
-                throw new Exception($"There are no such weather provider as {fromProvider.GetType()}");
-
-            return data;
         }
     }
 }
