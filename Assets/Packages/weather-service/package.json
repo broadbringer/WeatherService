@@ -4,6 +4,9 @@
   "displayName": "Weather Service",
   "description": "This is a WeatherService for Test Task.",
   "unity": "2019.1",
+  "dependencies": {
+    "com.cysharp.unitask": "2.5.0"
+  },
   "author": {
     "name": "Oleksandr Tokar",
     "email": "oleksandr.tokar.publish@gmail.com"
