@@ -4,6 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using WeatherService.Runtime.Data;
 using WeatherService.Runtime.Enums;
+using WeatherService.Runtime.Utils;
 using WeatherService.Runtime.WeatherProviders;
 
 namespace WeatherService.Runtime
@@ -22,6 +23,14 @@ namespace WeatherService.Runtime
         public void SetWindMeasurementUnit(WindMeasurementUnit @as) =>
             _windMeasurementUnit = @as;
 
+        public async UniTask<Weather> GetWeather(CancellationTokenSource cancellationTokenSource,
+            float maxWaitTimeInSeconds = 1000)
+        {
+            var location = await UserLocation.Get();
+            return await GetWeather(location._latitude, location._longitude, cancellationTokenSource,
+                maxWaitTimeInSeconds);
+        }
+        
         public async UniTask<Weather> GetWeather(float latitude, float longitude,
             CancellationTokenSource cancellationTokenSource, float maxWaitTimeInSeconds = 1000)
         {

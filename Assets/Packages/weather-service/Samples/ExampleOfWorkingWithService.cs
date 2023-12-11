@@ -2,6 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using WeatherService.Runtime.Enums;
+using WeatherService.Runtime.Utils;
 using WeatherService.Runtime.WeatherProviders;
 
 namespace Samples
