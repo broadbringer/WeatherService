@@ -4,17 +4,8 @@
   "displayName": "Weather Service",
   "description": "This is a WeatherService for Test Task.",
   "unity": "2019.1",
-  "scopedRegistries": [
-        {
-            "name": "package.openupm.com",
-            "url": "https://package.openupm.com",
-            "scopes": [
-                "com.cysharp.unitask"
-            ]
-        }
-    ],
     "dependencies": {
-        "com.cysharp.unitask": "2.5.0"
+        "com.cysharp.unitask": "2.4.0"
     },
   "author": {
     "name": "Oleksandr Tokar",
