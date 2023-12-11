@@ -5,6 +5,7 @@
   "description": "This is a WeatherService for Test Task.",
   "unity": "2019.1",
     "dependencies": {
+      "originer": "https://github.com/k0dep/originer.git",
         "com.cysharp.unitask": "2.4.0"
     },
   "author": {
