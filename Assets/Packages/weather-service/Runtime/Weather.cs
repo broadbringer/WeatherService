@@ -49,7 +49,7 @@ namespace WeatherService.Runtime
         {
             return weatherType switch
             {
-                WeatherType.Temperature => weatherData.Temperature,
+                WeatherType.Temperature => weatherData.GetTemperatureIn(withTemperatureMeasurementUnit).Temperature,
                 WeatherType.Humidity => weatherData.Humidity,
                 WeatherType.ApparentTemperature => weatherData.ApparentTemperature,
                 WeatherType.Rain => weatherData.Rain,
@@ -67,7 +67,7 @@ namespace WeatherService.Runtime
         {
             return weatherType switch
             {
-                WeatherType.Temperature => WeatherProviderToWeatherDataMap.Values.Average(v => v.Temperature),
+                WeatherType.Temperature => WeatherProviderToWeatherDataMap.Values.Average(v => v.GetTemperatureIn(withTemperatureMeasurementUnit).Temperature),
                 WeatherType.Humidity => WeatherProviderToWeatherDataMap.Values.Average(v => v.Humidity),
                 WeatherType.ApparentTemperature => WeatherProviderToWeatherDataMap.Values.Average(v =>
                     v.ApparentTemperature),

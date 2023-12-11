@@ -12,9 +12,8 @@ namespace WeatherService.Runtime.Data
         private WindMeasurementUnit _measurementUnit;
 
         private static readonly Dictionary<Tuple<WindMeasurementUnit, WindMeasurementUnit>, decimal> ConversionFactors =
-            new Dictionary<Tuple<WindMeasurementUnit, WindMeasurementUnit>, decimal>
+            new()
             {
-                // Factors for conversion between different units
                 { Tuple.Create(WindMeasurementUnit.MeterPerSecond, WindMeasurementUnit.KilometerPerHour), 3.6m },
                 { Tuple.Create(WindMeasurementUnit.MeterPerSecond, WindMeasurementUnit.MilesPerHour), 2.23694m },
                 { Tuple.Create(WindMeasurementUnit.KilometerPerHour, WindMeasurementUnit.MeterPerSecond), 1m / 3.6m },
@@ -31,30 +30,7 @@ namespace WeatherService.Runtime.Data
             WindGust = windGust;
             _measurementUnit = givenWindMeasurementUnit;
         }
-
-        public WindData(decimal windSpeed, decimal windDirection, decimal windGust)
-        {
-            WindSpeed = windSpeed;
-            WindDirection = windDirection;
-            WindGust = windGust;
-        }
-
-        private decimal ConvertKilometersPerHourToMeterPerSecond(decimal value) =>
-            (value * 5) / 18;
-
-        private decimal ConvertMetersPerSecondToKilometersPerHour(decimal value) =>
-            (value * 18) / 5;
-
-        private decimal Convert(decimal value, WindMeasurementUnit to)
-        {
-            return to switch
-            {
-                WindMeasurementUnit.KilometerPerHour => ConvertMetersPerSecondToKilometersPerHour(value),
-                WindMeasurementUnit.MeterPerSecond => ConvertKilometersPerHourToMeterPerSecond(value),
-                _ => throw new Exception("There are no given MeasurementUnit")
-            };
-        }
-
+        
         public WindData GetIn(WindMeasurementUnit windMeasurementUnit)
         {
             if (_measurementUnit == windMeasurementUnit)

@@ -2,7 +2,7 @@
 {
     public class WeatherData
     {
-        public decimal Temperature;
+        public TemperatureData Temperature;
         public decimal Humidity;
         public decimal ApparentTemperature;
         public decimal Rain;
@@ -14,9 +14,9 @@
         private TemperatureMeasurementUnit _temperatureMeasurementUnit;
         
         public WeatherData(decimal temperature, decimal humidity, decimal apparentTemperature, decimal rain,
-            decimal cloud, decimal snowfall, decimal windSpeed, decimal windDirection, decimal windGust, WindMeasurementUnit givenWindMeasurementUnit, TemperatureMeasurementUnit defaultWindMeasurementUnit)
+            decimal cloud, decimal snowfall, decimal windSpeed, decimal windDirection, decimal windGust, WindMeasurementUnit givenWindMeasurementUnit, TemperatureMeasurementUnit temperatureMeasurementUnit)
         {
-            Temperature = temperature;
+            Temperature = new TemperatureData(temperature, temperatureMeasurementUnit);
             Humidity = humidity;
             ApparentTemperature = apparentTemperature;
             Rain = rain;
@@ -25,6 +25,9 @@
             WindData = new WindData(windSpeed, windDirection, windGust, givenWindMeasurementUnit);
         }
 
+        public TemperatureData GetTemperatureIn(TemperatureMeasurementUnit temperatureMeasurementUnit) =>
+            Temperature.GetIn(temperatureMeasurementUnit);
+        
         public WindData GetWindDataIn(WindMeasurementUnit windMeasurementUnit) => 
             WindData.GetIn(windMeasurementUnit);
     }
